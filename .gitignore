@@ -1,0 +1,37 @@
+# Зависимости
+node_modules/
+dist/
+
+# Конфигурация БД (содержит пароли)
+api/config.php
+
+# Переменные окружения
+.env
+.env.local
+
+# Логи
+*.log
+debug_log.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript build cache
+node_modules/.tmp/
+
+# Debug-файлы (не для production)
+api/test_db.php
+api/test_put.php
+api/test_managers_put.php
+api/debug_managers.php
+api/cleanup.php
