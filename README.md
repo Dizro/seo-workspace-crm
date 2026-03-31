@@ -25,67 +25,12 @@
 
 ## Схема БД
 
-```mermaid
-erDiagram
-    managers {
-        CHAR(36) id PK
-        DATETIME created_at
-        DATETIME updated_at
-        VARCHAR(255) name
-        VARCHAR(255) telegram
-        TEXT comment
-        INT position
-        DATETIME deleted_at
-    }
+`managers` → `sites` → `tasks` (через `manager_id` и `site_id`)
 
-    task_templates {
-        CHAR(36) id PK
-        DATETIME created_at
-        VARCHAR(255) title
-        INT order
-        INT position
-    }
+`task_templates` → `tasks` (через `template_id`)
 
-    sites {
-        CHAR(36) id PK
-        DATETIME created_at
-        DATETIME updated_at
-        CHAR(36) manager_id FK
-        VARCHAR(500) url
-        TEXT comment
-        INT position
-        DATETIME deleted_at
-    }
-
-    tasks {
-        CHAR(36) id PK
-        DATETIME created_at
-        DATETIME updated_at
-        CHAR(36) site_id FK
-        CHAR(36) template_id FK
-        TINYINT(1) is_completed
-        TEXT comment
-        INT position
-        DATETIME deleted_at
-    }
-
-    audit_logs {
-        CHAR(36) id PK
-        DATETIME created_at
-        VARCHAR(50) entity_type
-        CHAR(36) entity_id
-        VARCHAR(50) action
-        TEXT details
-        VARCHAR(255) user_name
-    }
-
-    managers ||--o{ sites : "имеет"
-    sites ||--o{ tasks : "содержит"
-    task_templates ||--o{ tasks : "шаблон"
-```
-
-Индексы: `idx_sites_manager_id`, `idx_tasks_site_id`, `idx_tasks_template_id`, `idx_logs_entity`, `idx_managers_deleted`, `idx_sites_deleted`, `idx_tasks_deleted`.
-
+Индексы: `idx_sites_manager_id`, `idx_tasks_site_id`, `idx_tasks_template_id`, 
+`idx_logs_entity`, `idx_managers_deleted`, `idx_sites_deleted`, `idx_tasks_deleted`
 ---
 
 ## Интерфейс
